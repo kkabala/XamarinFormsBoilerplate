@@ -1,13 +1,15 @@
 using SQLite.Net;
+using SQLite.Net.Attributes;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using XamarinDDDTemplate.Infrastructure.DbAccess.Entities.Interfaces;
 using XamarinDDDTemplate.Infrastructure.DbAccess.Repositories.Interfaces;
 using XamarinDDDTemplate.Infrastructure.DbAccess.UnitOfWork.Interfaces;
-using XamarinDDDTemplate.Infrastructure.DbAccess.Utilities;
 
 namespace XamarinDDDTemplate.Infrastructure.Repository.Generic
 {
-    public class Repository<T> : IRepository<T> where T : class, new()
+    public class Repository<T> : IRepository<T> where T : class, IEntity, new()
     {
         protected readonly SQLiteConnection Connection;
 
@@ -18,7 +20,7 @@ namespace XamarinDDDTemplate.Infrastructure.Repository.Generic
 
         public int Count()
         {
-            string query = $"SELECT COUNT(*) AS Count FROM '{TableInfoExtractor.GetTableName(typeof(T))}'";
+            string query = $"SELECT COUNT(*) AS Count FROM '{GetTableName()}'";
             var result = Connection.Query<TableCountMap>(query);
             var firstItem = result.First();
             return firstItem.NumberOfItems;
@@ -37,8 +39,8 @@ namespace XamarinDDDTemplate.Infrastructure.Repository.Generic
         public T GetById(string idValue)
         {
             var query =
-                $"SELECT * FROM {TableInfoExtractor.GetTableName(typeof(T))} " +
-                $"WHERE {TableInfoExtractor.GetFirstPrimaryKeyTableName(typeof(T))} = '{idValue}'";
+                $"SELECT * FROM {GetTableName()} " +
+                $"WHERE {GetPrimaryKeys().First()} = '{idValue}'";
 
             return Connection.Query<T>(query).Single();
         }
@@ -65,7 +67,7 @@ namespace XamarinDDDTemplate.Infrastructure.Repository.Generic
 
         public void ClearTable()
         {
-            var query = $"DELETE FROM {TableInfoExtractor.GetTableName(typeof(T))}";
+            var query = $"DELETE FROM {GetTableName()}";
             Connection.Execute(query);
         }
 
@@ -77,6 +79,25 @@ namespace XamarinDDDTemplate.Infrastructure.Repository.Generic
         public void UpdateAll(IEnumerable<T> items)
         {
             Connection.UpdateAll(items);
+        }
+
+        private string GetTableName()
+        {
+            var attributes = typeof(T).GetTypeInfo().GetCustomAttributes(false);
+            var columnMapping = attributes.FirstOrDefault(m => m.GetType() == typeof(TableAttribute));
+
+            var mapsTo = (TableAttribute)columnMapping;
+            return mapsTo.Name;
+        }
+
+        private IEnumerable<PropertyInfo> GetPrimaryKeys()
+        {
+            var primaryKeysProperty =
+                typeof(T).GetTypeInfo()
+                    .DeclaredProperties.Where(
+                        m => m.GetCustomAttributes(false).Any(at => at.GetType() == typeof(PrimaryKeyAttribute)));
+
+            return primaryKeysProperty;
         }
 
         internal class TableCountMap

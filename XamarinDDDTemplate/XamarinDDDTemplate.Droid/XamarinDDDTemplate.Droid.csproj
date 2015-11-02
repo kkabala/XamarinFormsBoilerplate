@@ -87,6 +87,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IoCImplementations\FileSystem.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,6 +107,10 @@
     <Content Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\XamarinDDDTemplate.Infrastructure\XamarinDDDTemplate.Infrastructure.csproj">
+      <Project>{0fdad0a8-650c-4e5d-a9ce-89190246b4b9}</Project>
+      <Name>XamarinDDDTemplate.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XamarinDDDTemplate\XamarinDDDTemplate.csproj">
       <Name>XamarinDDDTemplate</Name>
     </ProjectReference>

@@ -94,6 +94,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IoCImplementations\FileSystem.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -159,6 +160,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\XamarinDDDTemplate.Infrastructure\XamarinDDDTemplate.Infrastructure.csproj">
+      <Project>{0fdad0a8-650c-4e5d-a9ce-89190246b4b9}</Project>
+      <Name>XamarinDDDTemplate.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XamarinDDDTemplate\XamarinDDDTemplate.csproj">
       <Name>XamarinDDDTemplate</Name>
     </ProjectReference>

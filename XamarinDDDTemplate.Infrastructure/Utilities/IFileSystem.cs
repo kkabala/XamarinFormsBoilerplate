@@ -15,8 +15,12 @@ namespace XamarinDDDTemplate.Infrastructure.Utilities
 
         void SaveFile(string filePath, byte[] fileContent);
 
-        void CreateEmptyDirectory(string directoryPath);
+        void CreateDirectory(string directoryPath);
 
         bool DirectoryExists(string directoryPath);
+
+        void CopyFile(string sourcePath, string destinationPath, bool overwrite = false);
+
+        void DeleteFile(string filePath);
     }
 }

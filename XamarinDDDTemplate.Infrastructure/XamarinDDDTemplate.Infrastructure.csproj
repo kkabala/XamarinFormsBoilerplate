@@ -44,7 +44,6 @@
     <Compile Include="DbAccess\Entities\Abstract\Entity.cs" />
     <Compile Include="DbAccess\Entities\Interfaces\IEntity.cs" />
     <Compile Include="DbAccess\Repositories\Interfaces\IRepository.cs" />
-    <Compile Include="DbAccess\Utilities\TableInfoExtractor.cs" />
     <Compile Include="Enums\AccessType.cs" />
     <Compile Include="Enums\FileMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
