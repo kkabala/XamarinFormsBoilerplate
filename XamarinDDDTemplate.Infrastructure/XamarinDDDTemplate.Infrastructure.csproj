@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0FDAD0A8-650C-4E5D-A9CE-89190246B4B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XamarinDDDTemplate.Infrastructure</RootNamespace>
+    <AssemblyName>XamarinDDDTemplate.Infrastructure</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DbAccess\Connection\Abstract\BaseSQLiteConnectionProvider.cs" />
+    <Compile Include="DbAccess\Connection\Abstract\SQLiteConnectionFactory.cs" />
+    <Compile Include="DbAccess\Connection\Interfaces\ISQLiteConnectionFactory.cs" />
+    <Compile Include="DbAccess\Connection\Interfaces\ISQLiteConnectionProvider.cs" />
+    <Compile Include="DbAccess\Entities\Abstract\Entity.cs" />
+    <Compile Include="DbAccess\Entities\Interfaces\IEntity.cs" />
+    <Compile Include="DbAccess\Repositories\Interfaces\IRepository.cs" />
+    <Compile Include="DbAccess\Utilities\TableInfoExtractor.cs" />
+    <Compile Include="Enums\AccessType.cs" />
+    <Compile Include="Enums\FileMode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DbAccess\UnitOfWork\Interfaces\IUnitOfWork.cs" />
+    <Compile Include="DbAccess\UnitOfWork\Interfaces\IUnitOfWorkFactory.cs" />
+    <Compile Include="DbAccess\UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="DbAccess\UnitOfWork\UnitOfWorkFactory.cs" />
+    <Compile Include="Repository\Generic\Repository.cs" />
+    <Compile Include="Utilities\IFileSystem.cs" />
+    <Compile Include="Utilities\IPathManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SQLite.Net, Version=3.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SQLite.Net-PCL.3.0.5\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
