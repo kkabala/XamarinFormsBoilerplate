@@ -5,16 +5,16 @@ namespace XamarinDDDTemplate.Infrastructure.DbAccess.UnitOfWork
 {
     public class UnitOfWorkFactory : IUnitOfWorkFactory
     {
-        private readonly ISQLiteConnectionFactory _sqLiteConnectionFactory;
+        private readonly ISQLiteConnectionFactory sqLiteConnectionFactory;
 
         public UnitOfWorkFactory(ISQLiteConnectionFactory sqLiteConnectionFactory)
         {
-            _sqLiteConnectionFactory = sqLiteConnectionFactory;
+            this.sqLiteConnectionFactory = sqLiteConnectionFactory;
         }
 
         public IUnitOfWork Create()
         {
-            return new UnitOfWork(_sqLiteConnectionFactory.GetConnection());
+            return new UnitOfWork(sqLiteConnectionFactory.GetConnection());
         }
     }
 }
