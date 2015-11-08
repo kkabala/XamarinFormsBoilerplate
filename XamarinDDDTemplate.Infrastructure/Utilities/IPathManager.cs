@@ -2,10 +2,6 @@
 {
     public interface IPathManager
     {
-        string GetOfflineDocumentsPath();
-
         string GetApplicationPath();
-
-        string GetOfflineImagesPath();
     }
 }

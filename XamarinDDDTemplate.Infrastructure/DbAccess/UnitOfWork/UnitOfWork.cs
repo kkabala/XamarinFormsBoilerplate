@@ -1,30 +1,21 @@
-﻿using System;
-using SQLite.Net;
+﻿using SQLite.Net;
 using XamarinDDDTemplate.Infrastructure.DbAccess.UnitOfWork.Interfaces;
 
 namespace XamarinDDDTemplate.Infrastructure.DbAccess.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public SQLiteConnection Connection { get; private set; }
-
         public UnitOfWork(SQLiteConnection connection)
         {
             Connection = connection;
             BeginTransaction();
         }
 
+        public SQLiteConnection Connection { get; }
+
         public void Dispose()
         {
-            //TODO:
-            //Connection.Rollback();
             Connection.Dispose();
-            GC.SuppressFinalize(this);
-        }
-
-        private void BeginTransaction()
-        {
-            Connection.BeginTransaction();
         }
 
         public void Commit()
@@ -35,6 +26,11 @@ namespace XamarinDDDTemplate.Infrastructure.DbAccess.UnitOfWork
         public void Rollback()
         {
             Connection.Rollback();
+        }
+
+        private void BeginTransaction()
+        {
+            Connection.BeginTransaction();
         }
     }
 }
