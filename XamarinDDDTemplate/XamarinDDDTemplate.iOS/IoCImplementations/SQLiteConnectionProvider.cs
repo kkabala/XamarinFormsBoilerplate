@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using XamarinDDDTemplate.Infrastructure.DbAccess.Connection.Abstract;
 
-namespace XamarinDDDTemplate.WinPhone.IoCImplementations
+namespace XamarinDDDTemplate.iOS.IoCImplementations
 {
     public class SQLiteConnectionProvider : BaseSQLiteConnectionProvider
     {

@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using Ninject;
 using XLabs.Ioc;
 using XLabs.Ioc.Ninject;
 
@@ -21,16 +21,17 @@ namespace XamarinDDDTemplate.WinPhone
             SupportedOrientations = SupportedPageOrientation.PortraitOrLandscape;
 
             global::Xamarin.Forms.Forms.Init();
-            SetIoc();
-            LoadApplication(new XamarinDDDTemplate.App());
+            var kernel = SetIoc();
+            LoadApplication(new XamarinDDDTemplate.XamarinCore.App(kernel));
         }
 
-        private void SetIoc()
+        private IKernel SetIoc()
         {
             var kernel = new StandardKernel();
-            kernel.Load(new []{typeof(MainPage).Assembly});
+            kernel.Load(new[] { typeof(MainPage).Assembly });
             var container = new NinjectContainer(kernel);
             Resolver.SetResolver(container.GetResolver());
+            return kernel;
         }
     }
 }

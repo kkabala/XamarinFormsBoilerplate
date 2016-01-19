@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-namespace XamarinDDDTemplate.Pages
+namespace XamarinDDDTemplate.XamarinCore.Views
 {
-    public partial class StartPage : ContentPage
+    public partial class StartView : ContentPage
     {
-        public StartPage()
+        public StartView()
         {
             InitializeComponent();
         }

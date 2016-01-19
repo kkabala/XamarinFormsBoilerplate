@@ -4,12 +4,12 @@ using Android.OS;
 using Ninject;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using XLabs.Ioc;
-using XLabs.Ioc.Ninject;
+using XamarinDDDTemplate.XamarinCore;
 
 namespace XamarinDDDTemplate.Droid
 {
-    [Activity(Label = "XamarinDDDTemplate", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "XamarinDDDTemplate", Icon = "@drawable/icon", MainLauncher = true,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FormsApplicationActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -17,17 +17,17 @@ namespace XamarinDDDTemplate.Droid
             base.OnCreate(bundle);
 
             Forms.Init(this, bundle);
-            SetIoc();
-            LoadApplication(new App());
+            var kernel = SetIoc();
+            LoadApplication(new App(kernel));
         }
 
-        private void SetIoc()
+        private IKernel SetIoc()
         {
             var kernel = new StandardKernel();
-            kernel.Load((typeof(MainActivity)).Assembly);
+            kernel.Load(typeof(MainActivity).Assembly);
             var container = new NinjectContainer(kernel);
             Resolver.SetResolver(container.GetResolver());
+            return kernel;
         }
     }
 }
-
