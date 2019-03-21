@@ -5,5 +5,4 @@ I'm one of that programmers.
 Every time when I'm starting a new project I do the same steps:
 - create an application project structure,
 - setting up an IoC containers,
-- provide database connections,
-- 
+- provide database connections
